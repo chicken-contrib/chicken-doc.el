@@ -70,7 +70,7 @@
   (let* ((collection (mapcar (lambda (item)
                                (cons (prin1-to-string item) item))
                              candidates)))
-    (cdr (assoc (completing-read "Term: " collection) collection))))
+    (cdr (assoc (completing-read "Select match " collection) collection))))
 
 (defun chicken-doc--show-candidate (candidate)
   (apply 'chicken-doc--command (mapcar 'symbol-name candidate))
