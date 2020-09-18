@@ -28,6 +28,7 @@
 ;;; Commentary:
 
 ;;; Code:
+(require 'ansi-color)
 
 (defgroup chicken-doc nil
   "CHICKEN Scheme doc commands"
@@ -45,15 +46,16 @@
   (when (not chicken-doc-command)
     (user-error "`chicken-doc-helper-command' isn't set"))
   (with-current-buffer (get-buffer-create chicken-doc-buffer)
+
     (let (buffer-read-only)
       (erase-buffer)
       (let ((process-environment process-environment))
-        ;; TODO: this doesn't work (yet)
         (setenv "CHICKEN_DOC_COLORS" "always")
         (let ((exit (apply 'call-process chicken-doc-command nil t nil args)))
           (when (not (zerop exit))
             (error "`chicken-doc-command' exited with %d, see %s"
-                   exit chicken-doc-buffer))))
+                   exit chicken-doc-buffer)))
+        (ansi-color-apply-on-region (point-min) (point-max)))
       (special-mode))))
 
 (defun chicken-doc--get-candidates (term &optional regexp)
