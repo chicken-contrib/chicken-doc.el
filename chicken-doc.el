@@ -46,7 +46,6 @@
   (when (not chicken-doc-command)
     (user-error "`chicken-doc-helper-command' isn't set"))
   (with-current-buffer (get-buffer-create chicken-doc-buffer)
-
     (let (buffer-read-only)
       (erase-buffer)
       (let ((process-environment process-environment))
@@ -70,7 +69,7 @@
 
 (defun chicken-doc--narrow-down-candidates (candidates)
   (let* ((collection (mapcar (lambda (item)
-                               (cons (prin1-to-string item) item))
+                               (cons (prin1-to-string item t) item))
                              candidates)))
     (cdr (assoc (completing-read "Select match " collection) collection))))
 
