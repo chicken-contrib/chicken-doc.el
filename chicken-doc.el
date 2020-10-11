@@ -55,7 +55,8 @@
             (error "`chicken-doc-command' exited with %d, see %s"
                    exit chicken-doc-buffer)))
         (ansi-color-apply-on-region (point-min) (point-max)))
-      (special-mode))))
+      (special-mode))
+    (setq header-line-format (prin1-to-string args t))))
 
 (defun chicken-doc--get-candidates (term &optional regexp)
   (chicken-doc--command (if regexp "-m" "-f") term)
