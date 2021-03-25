@@ -42,6 +42,11 @@
 
 (defvar chicken-doc-buffer "*chicken-doc*")
 
+(defun chicken-doc--filter-args (args)
+  (while (and args (string-match-p "^-" (car args)))
+    (pop args))
+  args)
+
 (defun chicken-doc--command (&rest args)
   (when (not chicken-doc-command)
     (user-error "`chicken-doc-helper-command' isn't set"))
@@ -56,7 +61,8 @@
                    exit chicken-doc-buffer)))
         (ansi-color-apply-on-region (point-min) (point-max))))
     (special-mode)
-    (setq header-line-format (prin1-to-string args t))))
+    (setq header-line-format
+          (prin1-to-string (chicken-doc--filter-args args) t))))
 
 (defun chicken-doc--get-candidates (term &optional regexp)
   (chicken-doc--command (if regexp "-m" "-f") term)
@@ -75,7 +81,7 @@
     (cdr (assoc (completing-read "Select match " collection) collection))))
 
 (defun chicken-doc--show-candidate (candidate)
-  (apply 'chicken-doc--command (mapcar 'symbol-name candidate))
+  (apply 'chicken-doc--command "-i" (mapcar 'symbol-name candidate))
   (with-current-buffer chicken-doc-buffer
     (goto-char (point-min)))
   (display-buffer chicken-doc-buffer))
