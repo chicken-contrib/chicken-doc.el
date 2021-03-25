@@ -91,7 +91,7 @@
   "Look up TERM using the chicken-doc command.
 Use the prefix argument to enable regex matching."
   (interactive
-   (let* ((default (thing-at-point 'symbol))
+   (let* ((default (thing-at-point 'symbol t))
           (prompt (if default
                       (format "Term (default %s): "
                               (substring-no-properties default))
