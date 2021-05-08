@@ -5,7 +5,7 @@
 ;; Author: Vasilij Schneidermann <mail@vasilij.de>
 ;; URL: https://depp.brause.cc/chicken-doc.el
 ;; Version: 0.0.1
-;; Package-Requires:
+;; Package-Requires: ((emacs "24.3"))
 ;; Keywords: languages
 
 ;; This file is NOT part of GNU Emacs.
