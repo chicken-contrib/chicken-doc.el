@@ -27,7 +27,15 @@
 
 ;;; Commentary:
 
+;; Provides a simple and non-intrusive integration to the
+;; `chicken-doc` CLI program for looking up documentation when
+;; programming in Scheme. The following customization is recommended:
+
+;; (with-eval-after-load 'scheme
+;;   (define-key scheme-mode-map (kbd "C-c C-d") 'chicken-doc-describe))
+
 ;;; Code:
+
 (require 'ansi-color)
 
 (defgroup chicken-doc nil
