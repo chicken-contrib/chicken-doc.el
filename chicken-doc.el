@@ -48,6 +48,9 @@
   :group 'chicken-doc
   :type 'string)
 
+(define-derived-mode chicken-doc-mode special-mode "chicken-doc"
+  "chicken-doc-powered documentation lookup")
+
 (defvar chicken-doc-buffer "*chicken-doc*")
 
 (defun chicken-doc--filter-args (args)
@@ -68,7 +71,7 @@
             (error "`chicken-doc-command' exited with %d, see %s"
                    exit chicken-doc-buffer)))
         (ansi-color-apply-on-region (point-min) (point-max))))
-    (special-mode)
+    (chicken-doc-mode)
     (setq header-line-format
           (prin1-to-string (chicken-doc--filter-args args) t))))
 
