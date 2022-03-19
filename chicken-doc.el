@@ -44,7 +44,7 @@
   :prefix "chicken-doc-")
 
 (defcustom chicken-doc-command (executable-find "chicken-doc")
-  "Path to `chicken-doc-helper' command."
+  "Path to `chicken-doc' command."
   :group 'chicken-doc
   :type 'string)
 
@@ -60,7 +60,7 @@
 
 (defun chicken-doc--command (&rest args)
   (when (not chicken-doc-command)
-    (user-error "`chicken-doc-helper-command' isn't set"))
+    (user-error "`chicken-doc-command' isn't set"))
   (with-current-buffer (get-buffer-create chicken-doc-buffer)
     (let (buffer-read-only)
       (erase-buffer)
